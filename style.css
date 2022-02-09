@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+ul{
+  list-style: none;
+}
+
 a{
   text-decoration: none;
 }
@@ -29,6 +33,10 @@ img{
 }
 
 /* ====== Base ===== */
+html{
+  scroll-behavior: smooth;
+}
+
 body {
   font: 400 1rem 'DM Sans', sans-serif;
   color: var(--text-color);
@@ -36,7 +44,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1{
+.title{
   font: 700 1.875rem "Poppins", sas-serif;
   color: var(--title-color);
   -webkit-font-smoothing: auto;
@@ -63,8 +71,18 @@ h1{
   height: 1px;
   background: linear-gradient(
     270deg,
-    hsla(var(--hue), 36%, 57%,1)0%,
-    hsla(var(--hue),65%, 88%, 0.34)100%
+    hsla(var(--hue), 36%, 57%,1),
+    hsla(var(--hue),65%, 88%, 0.34)
+    );
+}
+
+.divider-2{
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue),65%, 88%, 0.34),
+    hsla(var(--hue), 36%, 57%,1)
+    
     );
 }
 
@@ -86,12 +104,107 @@ h1{
 
 }
 
+#header.scroll{
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Navigation===== */
 nav{
   display: flex;
   justify-content: space-between;
   height: var(--header-height);
   align-items: center;
   width: 100%;
+}
+
+nav.show ul.grid{
+  gap: 4rem;
+}
+
+nav .menu{
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition:0.2s;
+}
+
+nav .menu ul{
+  display:none;
+}
+
+nav ul li {
+  text-align: center;
+  
+}
+
+nav ul li a{
+  transition: color 0.3s;
+  position: relative;
+}
+
+nav ul li a:hover{
+  color: var(--base-color);
+}
+
+nav ul li a::after{
+  content:'';
+  width:0;
+  height: 2px;
+  background-color: var(--base-color);
+
+  position: absolute;
+  left: 0;
+  bottom: -1.5rem;
+  transition: 0.2s;
+}
+
+nav ul li a:hover::after{
+  width: 100%;
+}
+
+nav.show .menu{
+  opacity: 1;
+  visibility: visible; 
+
+  background-color: var(--body-color);
+  height: 100vh;
+  width: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: grid;
+  place-content: center;
+}
+
+ nav.show .menu ul{
+  display:grid;
+}
+
+/*=========Toggle Menu=========*/
+.toggle{
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
+nav .icon-close{
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+
+  transition:0.2s;
+}
+
+nav.show div.icon-close{
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
 }
 
 .logo{
@@ -120,9 +233,22 @@ nav{
   padding: 5rem 0;
 }
 
-main{
-margin-top: var(--header-height);
+.section .title{
+  margin-bottom: 1rem;
 }
+
+.section header{
+  margin-bottom: 4rem ;
+}
+
+.section header strong{
+  color: var(--base-color)
+}
+
+main{
+margin-top: calc(var(--header-height) + 2rem);
+}
+
 
 /* ======Home======== */
 #home {
@@ -173,3 +299,69 @@ margin-top: var(--header-height);
   margin-bottom: 2rem;
  
  }
+
+ /* ======Abount======== */
+#abount{
+  background: white;
+}
+
+ #abount .container{
+   margin: 0;
+ }
+
+ #abount .image{
+  position: relative;
+ }
+
+ #abount .image::before{
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -8.3%;
+  left: -33%;
+  z-index: 0;
+}
+
+#abount .image img{
+   position: relative;
+   right: 2.93rem;
+
+ }
+ #abount .image img,
+ #abount .image::before{
+   border-radius: 0.25rem;
+ }
+
+ #abount .text{
+   margin-left: 1.5rem;
+   margin-right: 1.5rem;
+   
+ }
+
+ /* ======Services======== */
+ .cards.grid{
+   gap:1.5rem;
+ }
+
+ .card{
+   padding:3.625rem 2rem;
+   box-shadow: 0px 0px 12px rgb(0,0,0,0.08);
+   border-bottom: 0.25rem solid var(--base-color);
+   border-radius: 0.25rem 0.25rem 0 0;
+   text-align: center;
+ }
+
+ .card i{
+   display:block;
+   margin-bottom: 1.5rem;
+   font-size: 5rem;
+   color: var(--base-color)
+ }
+
+ .card .title{
+   font-size: 1.5rem;
+   margin-bottom: 0.75rem;
+ }
+
